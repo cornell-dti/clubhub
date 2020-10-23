@@ -4,16 +4,24 @@ const firestore = require("@google-cloud/firestore");
 const admin = require("firebase-admin");
 const db = admin.firestore();
 
+//TODO: Factor out the operation Date -> Timestamp and vice versa
+
 router
   .route("/:category?")
   .get((req, res) => {
     (async () => {
       try {
+        const orderByName = req.query.orderByName;
         const now = new Date();
         const query = db.collection("clubs");
-        const response = await query
+        const category = req.params.category;
+        const response = await (category
+          ? query.where("category", "==", category)
+          : query
+        )
           .where("due", ">", now)
           .orderBy("due")
+          .orderBy("foldedName")
           .get()
           .then((querySnapshot) => {
             return querySnapshot.docs.map((doc) => {
@@ -24,6 +32,7 @@ router
                 category: data.category,
                 due: due,
                 link: data.link,
+                image: data.image,
               };
             });
           });
@@ -39,8 +48,10 @@ router
       try {
         const dateDue = new Date(req.body.due);
         const timestampDue = firestore.Timestamp.fromDate(dateDue);
+        const foldedName = foldName(req.body.name);
         await db.collection("clubs").add({
           name: req.body.name,
+          foldedName: foldedName,
           category: req.body.category,
           due: timestampDue,
           link: req.body.link,
@@ -54,20 +65,6 @@ router
     })();
   });
 
-router.route("/:category").get((req, res) => {
-  (async () => {
-    try {
-      const document = db.collection("clubs").doc(req.params.id);
-      let club = await document.get();
-      let response = club.data();
-      response.due = response.due.toDate();
-
-      return res.status(200).send(response);
-    } catch (e) {
-      console.log(e);
-      return res.status(500).send(e);
-    }
-  })();
-});
+const foldName = (name) => name.toLowerCase().replace(/[^0-9A-Z]+/gi, "");
 
 module.exports = router;

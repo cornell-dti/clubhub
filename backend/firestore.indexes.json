@@ -1,4 +1,39 @@
 {
-  "indexes": [],
-  "fieldOverrides": []
+  "indexes":[
+     {
+        "collectionGroup":"clubs",
+        "queryScope":"COLLECTION",
+        "fields":[
+           {
+              "fieldPath":"category",
+              "order":"ASCENDING"
+           },
+           {
+              "fieldPath":"due",
+              "order":"ASCENDING"
+           },
+           {
+             "fieldPath": "foldedName",
+             "order": "ASCENDING"
+           }
+        ]
+     },
+     {
+      "collectionGroup":"clubs",
+      "queryScope":"COLLECTION",
+      "fields":[
+         {
+            "fieldPath":"due",
+            "order":"ASCENDING"
+         },
+         {
+           "fieldPath": "foldedName",
+           "order": "ASCENDING"
+         }
+      ]
+   }
+  ],
+  "fieldOverrides":[
+     
+  ]
 }
