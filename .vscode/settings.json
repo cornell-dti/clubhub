@@ -1,3 +1,5 @@
 {
-  "eslint.workingDirectories": ["./backend/functions"]
+  "eslint.workingDirectories": [
+    { "directory": "./backend/functions", "changeProcessCWD": true }
+  ]
 }
