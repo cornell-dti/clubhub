@@ -1,7 +1,7 @@
-const express = require("express");
+import * as express from "express";
+import * as firestore from "@google-cloud/firestore";
+import * as admin from "firebase-admin";
 const router = express.Router();
-const firestore = require("@google-cloud/firestore");
-const admin = require("firebase-admin");
 const db = admin.firestore();
 
 //TODO: Factor out the operation Date -> Timestamp and vice versa
@@ -11,7 +11,7 @@ router
   .get((req, res) => {
     (async () => {
       try {
-        const orderByName = req.query.orderByName;
+        // const orderByName = req.query.orderByName;
         const now = new Date();
         const query = db.collection("clubs");
         const category = req.params.category;
@@ -65,6 +65,7 @@ router
     })();
   });
 
-const foldName = (name) => name.toLowerCase().replace(/[^0-9A-Z]+/gi, "");
+const foldName = (name: string) =>
+  name.toLowerCase().replace(/[^0-9A-Z]+/gi, "");
 
-module.exports = router;
+export default router;
