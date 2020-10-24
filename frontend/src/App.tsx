@@ -37,11 +37,15 @@ const App = () => {
   );
 
   return (
-    <div>
+    <div className="Container">
       <Header />
-      <Categories />
-      <Sort />
-      {clubs}
+        <div className="Main">
+            <Categories />
+            <div className="CardFrame">
+                <Sort />
+                {clubs}
+            </div>
+        </div>
     </div>
   );
 };

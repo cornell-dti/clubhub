@@ -1,7 +1,7 @@
 import React from "react";
 import "./ClubCard.css";
 
-const clubCard = (props) => {
+const clubCard = ({application_link, application_name, name, due_date}: Props) => {
   return (
     <div className="Club-container">
       <div className="Club-header-container">
@@ -9,18 +9,25 @@ const clubCard = (props) => {
           className="Club-logo" 
           src={require("../../assets/dti_logo.svg")}
           alt="logo" />
-        <h3 className="Club-name">{props.name}</h3>
+        <h3 className="Club-name">{name}</h3>
       </div>
       <ul>
         <li className="Club-application">
-          <a href={props.application_link}>
-            {props.application_name}
+          <a href={application_link}>
+            {application_name}
           </a>
         </li>
-        <li>Due: {props.due_date}</li>
+        <li>Due: {due_date}</li>
       </ul>
     </div>
   );
 };
 
 export default clubCard;
+
+interface Props {
+    name: string
+    due_date: string
+    application_link: string
+    application_name: string
+}

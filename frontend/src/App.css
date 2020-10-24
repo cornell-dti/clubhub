@@ -5,3 +5,18 @@
 * {
   font-family: 'quicksand';
 }
+
+.Container {
+    display: flex;
+    flex-direction: column;
+}
+
+.Main {
+    display: flex;
+}
+
+
+.CardFrame {
+    display: flex;
+    flex-direction: column;
+}

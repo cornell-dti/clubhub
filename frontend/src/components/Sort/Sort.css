@@ -1,7 +1,9 @@
 .Sort-button {
+    display: flex;
     font-size: large;
     color: #757575;
     font-weight: bold;
+    align-items: center;
 }
 
 .Sort-icon {

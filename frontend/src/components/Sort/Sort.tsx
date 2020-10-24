@@ -8,7 +8,7 @@ const Sort = () => {
 
     const switchSortMeth = () => {
         setSortState({
-            sortMeth: (sortState.sortMeth == 'Due Date')? 'Club Name' : 'Due Date'
+            sortMeth: (sortState.sortMeth === 'Due Date')? 'Club Name' : 'Due Date'
         });
     }
 
