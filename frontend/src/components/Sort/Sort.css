@@ -1,0 +1,14 @@
+.Sort-button {
+    font-size: large;
+    color: #757575;
+    font-weight: bold;
+}
+
+.Sort-icon {
+    float: left;
+    padding-right: 10px;
+}
+
+.Sort-button:hover {
+    cursor: pointer;
+}
