@@ -11,7 +11,6 @@ router
   .get((req, res) => {
     (async () => {
       try {
-        const orderByName = req.query.orderByName;
         const now = new Date();
         const query = db.collection("clubs");
         const category = req.params.category;
