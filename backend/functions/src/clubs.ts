@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as firestore from '@google-cloud/firestore';
-import * as admin from 'firebase-admin';
+import admin from './admin';
 
 const router = express.Router();
 const db = admin.firestore();
