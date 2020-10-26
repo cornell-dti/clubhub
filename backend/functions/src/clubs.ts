@@ -5,15 +5,12 @@ import * as admin from 'firebase-admin';
 const router = express.Router();
 const db = admin.firestore();
 
-// TODO: Factor out the operation Date -> Timestamp and vice versa
-
 const foldName = (name: string) => name.toLowerCase().replace(/[^0-9A-Z]+/gi, '');
 
 router
   .route('/:category?')
   .get(async (req, res) => {
     try {
-      // Do we want to orderByName?
       const now = new Date();
       const query = db.collection('clubs');
       const { category } = req.params;
