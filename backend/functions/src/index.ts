@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import { https } from 'firebase-functions';
 import * as express from 'express';
 import * as cors from 'cors';
 import clubs from './clubs';
@@ -10,4 +10,4 @@ app.use(cors({ origin: true }));
 
 app.use('/clubs', clubs);
 
-export default functions.https.onRequest(app);
+export default https.onRequest(app);

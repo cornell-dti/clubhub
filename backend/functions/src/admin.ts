@@ -1,5 +1,5 @@
 import * as admin from 'firebase-admin';
-import * as firebaseKey from './_firebase-key.json';
+import * as firebaseKey from './firebase-key.json';
 
 const serviceAccount = firebaseKey as admin.ServiceAccount;
 
