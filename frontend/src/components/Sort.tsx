@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Sort.css';
+import { SortButton } from '../styling/StyledHome';
 
 const Sort = () => {
     const [sortState, setSortState] = useState({
@@ -13,10 +13,10 @@ const Sort = () => {
     }
 
     return (
-        <div className="Sort-button" onClick={switchSortMeth}>
-            <img className="Sort-icon" src={require("../../assets/sort_icon.svg")} alt="sort icon"/>
+        <SortButton onClick={switchSortMeth}>
+            <img className="Sort-icon" src={require("../assets/sort_icon.svg")} alt="sort icon"/>
             <p>{'Sort By: ' + sortState.sortMeth}</p>
-        </div>
+        </SortButton>
     );
 };
 

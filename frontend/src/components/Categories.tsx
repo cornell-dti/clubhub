@@ -1,9 +1,9 @@
 import React from "react";
-import "./Categories.css";
+import { CategoriesContainer } from "../styling/StyledHome";
 
 const categories = () => {
   return (
-    <div className="Categories">
+    <CategoriesContainer>
       <h2>Categories</h2>
       <ul>
         <li><a href="#all">All</a></li>
@@ -17,7 +17,7 @@ const categories = () => {
         <li><a href="#sustainability">Sustainability</a></li>
         <li><a href="#sports">Sports</a></li>
       </ul>
-    </div>
+    </CategoriesContainer>
   );
 };
 

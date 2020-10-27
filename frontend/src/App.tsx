@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import './App.css';
-import Header from './components/Header/Header';
-import Categories from './components/Categories/Categories';
-import Sort from './components/Sort/Sort';
-import ClubCard from './components/ClubCard/ClubCard';
+import { Container, Main, CardFrame } from './styling/StyledHome';
+import Header from './components/Header';
+import Categories from './components/Categories';
+import Sort from './components/Sort';
+import ClubCard from './components/ClubCard';
 
 const App = () => {
-  const [clubsState, setClubsState] = useState({
+  const [clubsState, _] = useState({
     clubs: [
       {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
       {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
@@ -37,16 +37,16 @@ const App = () => {
   );
 
   return (
-    <div className="Container">
+    <Container>
       <Header />
-        <div className="Main">
-            <Categories />
-            <div className="CardFrame">
-                <Sort />
-                {clubs}
-            </div>
-        </div>
-    </div>
+      <Main>
+        <Categories />
+        <CardFrame>
+          <Sort />
+          {clubs}
+        </CardFrame>
+      </Main>
+    </Container>
   );
 };
 
