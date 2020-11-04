@@ -5,8 +5,7 @@ import Categories from './components/Categories';
 import Sort from './components/Sort';
 import ClubCard from './components/ClubCard';
 import axios from 'axios';
-
-const BASE_URL = 'https://us-central1-clubhub-dev-89ca0.cloudfunctions.net/default';
+import { BASE_URL } from './constants';
 
 type ServerApp = {
   id: string;
