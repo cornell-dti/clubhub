@@ -47,41 +47,11 @@ export const HeaderContainer = styled.div`
             outline: none;
         }
     }
-
-    ul {
-        list-style-type: none;
-        font-size: large;
-    }
-
-    li {
-        float: left;
-    }
-
-    a {
-        display: block;
-        color: black;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-
-        &:focus {
-            font-weight: bold;
-        }
-    }
 `;
 
 export const CategoriesContainer = styled.div`
     width: 500px;
     padding: 20px;
-
-    h2 {
-        padding: 0%;
-    }
-
-    h3 {
-        margin: 5px;
-        padding: 0%;
-    }
 
     ul {
         list-style-type: none;
