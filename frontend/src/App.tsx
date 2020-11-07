@@ -9,25 +9,25 @@ import Pagination from './components/Pagination';
 const App = () => {
   const [clubs] = useState(
     [
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'}
+      {name: 'AguaClara Cornell', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Autonomous Bicycle', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Concrete Canoe', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell AppDev', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Baja Racing', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell ChemE Car', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Cup Robotics', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Data Science', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Design and Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Design Build Fly', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Electric Vehicles', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Engaged IoT', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Engineering World Health', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Hyperloop', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell ICPC', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell iGem', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Mars Rover', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Micro-G', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Racing', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'}
     ]
   );
   const [currentPage, setCurrentPage] = useState(1);
