@@ -7,7 +7,7 @@ import ClubCard from './components/ClubCard';
 import Pagination from './components/Pagination';
 
 const App = () => {
-  const [clubs, setClubs] = useState(
+  const [clubs] = useState(
     [
       {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
       {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
@@ -64,20 +64,25 @@ const App = () => {
     </div>
   );
 
+  const cardFrame = 
+    currentCards.length === 0 ?
+    <h3>No applications available</h3> : 
+    <CardFrame>
+      <Sort />
+      {currentCardsDisplay}
+      <Pagination 
+        cardsPerPage={cardsPerPage} 
+        totalCards={currentCards.length}
+        paginate={paginate}
+      />
+    </CardFrame>
+
   return (
     <Container>
       <Header searchHandler={searchHandler} />
       <Main>
         <Categories />
-        <CardFrame>
-          <Sort />
-          {currentCardsDisplay}
-          <Pagination 
-            cardsPerPage={cardsPerPage} 
-            totalCards={clubs.length}
-            paginate={paginate}
-          />
-        </CardFrame>
+        {cardFrame}
       </Main>
     </Container>
   );
