@@ -72,7 +72,7 @@ const App = () => {
       {currentCardsDisplay}
       <Pagination 
         cardsPerPage={cardsPerPage} 
-        totalCards={currentCards.length}
+        totalCards={searchedCards.length}
         paginate={paginate}
       />
     </CardFrame>
