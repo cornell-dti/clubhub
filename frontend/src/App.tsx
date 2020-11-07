@@ -9,7 +9,8 @@ import { BASE_URL } from './constants';
 
 type ServerApp = {
   id: string;
-  name: string;
+  appName: string;
+  clubName: string;
   foldedName?: string;
   category: string;
   due: string;
@@ -32,9 +33,9 @@ const App = () => {
       {apps.map((app) => {
         return (
           <ClubCard
-            name={app.name}
+            name={app.clubName}
             application_link={app.link}
-            application_name={app.name + ' Application'}
+            application_name={app.appName + ' Application'}
             due_date={new Date(app.due).toDateString()}
           />
         );
