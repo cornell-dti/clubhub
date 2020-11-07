@@ -2,10 +2,13 @@ import React from 'react';
 import { StyledPagination } from '../styling/StyledHome';
 
 const Pagination = ({ cardsPerPage, totalCards, paginate }: Props ) => {
+  const numPages = Math.ceil(totalCards / cardsPerPage);
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
-    pageNumbers.push(i);
+  if (numPages > 1) {
+    for (let i = 1; i <= numPages; i++) {
+      pageNumbers.push(i);
+    }
   }
 
   return (

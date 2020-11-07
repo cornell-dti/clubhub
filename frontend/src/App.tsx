@@ -21,6 +21,12 @@ const App = () => {
       {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
       {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
       {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
+      {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
       {name: 'Cornell Design & Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'}
     ]
   );
@@ -41,9 +47,10 @@ const App = () => {
     setCurrentPage(pageNumber)
   );
 
-  const searchHandler = (event: React.ChangeEvent<HTMLInputElement>) => (
-    setSearch(event.target.value)
-  );
+  const searchHandler = function(event: React.ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value);
+    setCurrentPage(1);
+  };
 
   const currentCardsDisplay = (
     <div>
