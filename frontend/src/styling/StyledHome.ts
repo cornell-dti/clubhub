@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '../constants/Colors';
+import searchIcon from '../assets/search_icon.svg';
 
 export const Container = styled.div`
     display: flex;
@@ -30,6 +31,23 @@ export const HeaderContainer = styled.div`
         margin: 0;
     }
 
+    input {
+        width: 450px;
+        height: 30px;
+        border-radius: 100px;
+        padding: 0 10px;
+        box-shadow: 2px 2px 5px 2px ${colors.light_grey};
+        border-style: none;
+        background-image: url(${searchIcon});
+        background-position: 7px 7px;
+        background-repeat: no-repeat;
+        text-indent: 30px;
+        
+        &:focus {
+            outline: none;
+        }
+    }
+
     ul {
         list-style-type: none;
         font-size: large;
@@ -55,6 +73,15 @@ export const HeaderContainer = styled.div`
 export const CategoriesContainer = styled.div`
     width: 500px;
     padding: 20px;
+
+    h2 {
+        padding: 0%;
+    }
+
+    h3 {
+        margin: 5px;
+        padding: 0%;
+    }
 
     ul {
         list-style-type: none;
@@ -87,8 +114,10 @@ export const SortButton = styled.div`
         padding-right: 10px;
     }
 
-    &:hover {
-        cursor: pointer;
+    p {
+        &:hover {
+            cursor: pointer;
+        }
     }
 `;
 
@@ -143,3 +172,28 @@ export const ClubHeaderContainer = styled.div`
     }
 `;
 
+export const StyledPagination = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ul {
+        list-style-type: none;
+    }
+
+    li {
+        float: left;
+        margin: 5px;
+    }
+
+    a {
+        display: block;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+
+        &:focus {
+            font-weight: bold;
+        }
+    }
+`;

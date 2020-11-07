@@ -13,9 +13,9 @@ const Sort = () => {
     }
 
     return (
-        <SortButton onClick={switchSortMeth}>
+        <SortButton>
             <img className="Sort-icon" src={require("../assets/sort_icon.svg")} alt="sort icon"/>
-            <p>{'Sort By: ' + sortState.sortMeth}</p>
+            <p onClick={switchSortMeth}>{'Sort By: ' + sortState.sortMeth}</p>
         </SortButton>
     );
 };

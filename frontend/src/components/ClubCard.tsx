@@ -19,8 +19,8 @@ const clubCard = ({application_link, application_name, name, due_date}: Props) =
 export default clubCard;
 
 interface Props {
-    name: string
-    due_date: string
-    application_link: string
-    application_name: string
+  name: string
+  due_date: string
+  application_link: string
+  application_name: string
 }

@@ -5,6 +5,7 @@ const categories = () => {
   return (
     <CategoriesContainer>
       <h2>Categories</h2>
+      <h3>By Club</h3>
       <ul>
         <li><a href="#all">All</a></li>
         <li><a href="#academic">Academic</a></li>
@@ -16,6 +17,18 @@ const categories = () => {
         <li><a href="#publication-media">Publication/Media</a></li>
         <li><a href="#sustainability">Sustainability</a></li>
         <li><a href="#sports">Sports</a></li>
+      </ul>
+
+      <h3>By Role</h3>
+      <ul>
+        <li><a href="#all">All</a></li>
+        <li><a href="#art">Art</a></li>
+        <li><a href="#computer-science">Computer Science</a></li>
+        <li><a href="#design">Design</a></li>
+        <li><a href="#logistics-events">Logistics/Events</a></li>
+        <li><a href="#business">Business</a></li>
+        <li><a href="#service">Service</a></li>
+        <li><a href="#operations">Operationsl</a></li>
       </ul>
     </CategoriesContainer>
   );
