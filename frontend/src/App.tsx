@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Main, CardFrame } from './styling/StyledHome';
 import Header from './components/Header';
-import Categories from './components/Categories';
+import CategoriesPanel from './components/CategoriesPanel';
 import Sort from './components/Sort';
 import ClubCard from './components/ClubCard';
 import axios from 'axios';
 import { BASE_URL } from './constants';
+import { useHash } from './hooks/useHash';
 
 type ServerApp = {
   id: string;
-  name: string;
+  appName: string;
+  clubName: string;
   foldedName?: string;
   category: string;
   due: string;
@@ -19,6 +21,10 @@ type ServerApp = {
 
 const App = () => {
   const [apps, setApps] = useState<ServerApp[]>([]);
+  const [hash] = useHash();
+
+  const query = hash.replace('#', '');
+  const filteredApps = query ? apps.filter(({ category }) => category === query) : apps;
 
   useEffect(() => {
     axios
@@ -29,12 +35,13 @@ const App = () => {
 
   const appCards = (
     <div>
-      {apps.map((app) => {
+      {filteredApps.map((app) => {
         return (
           <ClubCard
-            name={app.name}
+            key={app.id}
+            name={app.clubName}
             application_link={app.link}
-            application_name={app.name + ' Application'}
+            application_name={app.appName}
             due_date={new Date(app.due).toDateString()}
           />
         );
@@ -46,7 +53,7 @@ const App = () => {
     <Container>
       <Header />
       <Main>
-        <Categories />
+        <CategoriesPanel />
         <CardFrame>
           <Sort />
           {appCards}
