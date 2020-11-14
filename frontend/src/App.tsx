@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Main, CardFrame } from './styling/StyledHome';
+import { Container, Main, ClubGrid } from './styling/StyledHome';
 import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
@@ -53,7 +53,7 @@ const App = () => {
   };
 
   const currentCardsDisplay = (
-    <div>
+    <ClubGrid>
       {currentCards.map(club => {
         return <ClubCard
           name={club.name}
@@ -61,13 +61,14 @@ const App = () => {
           application_name={club.application}
           due_date={club.due} />
       })}
-    </div>
+      
+    </ClubGrid>
   );
 
   const cardFrame = 
     currentCards.length === 0 ?
     <h3>No applications available</h3> : 
-    <CardFrame>
+    <div>
       <Sort />
       {currentCardsDisplay}
       <Pagination 
@@ -75,7 +76,8 @@ const App = () => {
         totalCards={searchedCards.length}
         paginate={paginate}
       />
-    </CardFrame>
+    </div>
+    
 
   return (
     <Container>

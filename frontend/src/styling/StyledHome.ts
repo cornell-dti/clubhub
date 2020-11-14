@@ -11,19 +11,13 @@ export const Main = styled.div`
     display: flex;
 `;
 
-export const CardFrame = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
 export const HeaderContainer = styled.div`
     min-height: 100px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding 20px 7% 0 30px;
 
     img {
         height: 80px;
@@ -32,7 +26,9 @@ export const HeaderContainer = styled.div`
     }
 
     input {
-        width: 450px;
+        width: 30vw;
+        min-width: 200px;
+        max-width: 450px;
         height: 30px;
         border-radius: 100px;
         padding: 0 10px;
@@ -50,12 +46,13 @@ export const HeaderContainer = styled.div`
 `;
 
 export const CategoriesContainer = styled.div`
-    width: 500px;
-    padding: 20px;
+    padding-left: 80px;
+    font-size: 20px;
+    margin: 0;
 
     ul {
         list-style-type: none;
-        margin-left: 20px;
+        margin: 10px 0 20px 20px;
         padding: 0%;
     }
 
@@ -71,10 +68,20 @@ export const CategoriesContainer = styled.div`
             font-weight: bold;
         }
     }
+
+    h2 {
+        margin 10px 0 10px 0;
+    }
+
+    h3 {
+        margin: 0 0 0 10px;
+    }
 `;
 
 export const SortButton = styled.div`
     display: flex;
+    padding-left: 80px;
+    width: 100%;
     font-size: large;
     color: #757575;
     font-weight: bold;
@@ -91,13 +98,22 @@ export const SortButton = styled.div`
     }
 `;
 
+export const ClubGrid = styled.div`
+    display: flex;
+    padding-right: 50px;
+    padding-left: 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+`;
+
 export const ClubCardContainer = styled.div`
-    float: left;
-    margin: 20px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 5% 50px 5%;
     background-color: ${colors.white};
-    width: 360px;
-    height: 200px;
+    width: 40%;
+    min-width: 400px;
+    height: 240px;
     box-shadow: 0 3px 3px ${colors.light_grey};
     border-radius: 20px;
     text-align: left;
@@ -107,8 +123,10 @@ export const ClubCardContainer = styled.div`
     ul {
         list-style-type: none;
         padding-left: 25px;
-        font-size: 18px;
+        font-size: 20px;
         letter-spacing: 1px;
+        margin-top: 15px;
+        margin-bottom: 12px;
     }
 
     a {
@@ -120,7 +138,7 @@ export const ClubCardContainer = styled.div`
 
 export const ClubHeaderContainer = styled.div`
     width: 100%;
-    height: 60%;
+    height: 65%;
     background-color: ${colors.dark_grey};
     text-align: center;
     color: ${colors.white};
@@ -146,9 +164,11 @@ export const StyledPagination = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 
     ul {
         list-style-type: none;
+        padding: 0;
     }
 
     li {
