@@ -26,29 +26,24 @@ export const HeaderContainer = styled.div`
     padding-left: 30px;
     padding-right: 30px;
     margin-top: 10px;
-
     img {
         height: 80px;
         flex-shrink: 0;
         margin: 0;
     }
-
     ul {
         list-style-type: none;
         font-size: large;
     }
-
     li {
         float: left;
     }
-
     a {
         display: block;
         color: black;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
-
         &:focus {
             font-weight: bold;
         }
@@ -59,26 +54,21 @@ export const CategoriesContainer = styled.div`
     padding: 20px;
     padding-left: 80px;
     font-size: 20px;
-
     ul {
         list-style-type: none;
         margin-left: 20px;
         padding: 0%;
     }
-
     li {
         margin: 0 0 5px 0;
     }
-
     a {
         color: black;
         text-decoration: none;
-
         &:focus {
             font-weight: bold;
         }
     }
-
     @media ${device.mobileM} { 
         padding: 10px;
         padding-left: 40px;
@@ -91,11 +81,9 @@ export const SortButton = styled.div`
     padding-left: 80px;
     font-weight: bold;
     align-items: center;
-
     img {
         padding-right: 10px;
     }
-
     &:hover {
         cursor: pointer;
     }
@@ -122,7 +110,6 @@ export const ClubCardContainer = styled.div`
     text-align: left;
     align-content: center;
     overflow: hidden;
-
     ul {
         list-style-type: none;
         font-size: 20px;
@@ -130,7 +117,6 @@ export const ClubCardContainer = styled.div`
         margin-top: 15px;
         margin-bottom: 12px;
     }
-
     a {
         color: ${colors.black};
         text-decoration: none;
@@ -144,7 +130,6 @@ export const ClubHeaderContainer = styled.div`
     background-color: ${colors.dark_grey};
     text-align: center;
     color: ${colors.white};
-
     img {
         float: left;
         padding: 25px;
@@ -152,7 +137,6 @@ export const ClubHeaderContainer = styled.div`
         height: 70px;
         border-radius: 30%;
     }
-
     h3 {
         float: left;
         width: 235px;
@@ -161,4 +145,3 @@ export const ClubHeaderContainer = styled.div`
         font-size: 25px;  
     }
 `;
-
