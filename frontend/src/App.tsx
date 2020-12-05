@@ -35,8 +35,8 @@ const App = () => {
   }, []);
 
   const searchedCards = apps.filter(app => 
-    //app.name.toLowerCase().includes(search.toLowerCase())
-    true
+    app.appName.toLowerCase().includes(search.toLowerCase()) ||
+    app.clubName.toLowerCase().includes(search.toLowerCase())
   );
 
   const indexOfLastCard = currentPage * cardsPerPage;
