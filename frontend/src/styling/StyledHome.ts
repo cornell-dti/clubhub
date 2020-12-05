@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { colors } from '../constants';
+import { colors } from '../constants/Colors';
+import { device } from './Media';
 
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    max-width: 100%;   
 `;
 
 export const Main = styled.div`
@@ -23,6 +25,7 @@ export const HeaderContainer = styled.div`
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
+    margin-top: 10px;
 
     img {
         height: 80px;
@@ -53,8 +56,9 @@ export const HeaderContainer = styled.div`
 `;
 
 export const CategoriesContainer = styled.div`
-    width: 500px;
     padding: 20px;
+    padding-left: 80px;
+    font-size: 20px;
 
     ul {
         list-style-type: none;
@@ -74,12 +78,17 @@ export const CategoriesContainer = styled.div`
             font-weight: bold;
         }
     }
+
+    @media ${device.mobileM} { 
+        padding: 10px;
+        padding-left: 40px;
+      }
 `;
 
 export const SortButton = styled.div`
     display: flex;
-    font-size: large;
     color: #757575;
+    padding-left: 80px;
     font-weight: bold;
     align-items: center;
 
@@ -92,13 +101,22 @@ export const SortButton = styled.div`
     }
 `;
 
+export const ClubGrid = styled.div`
+    display: flex;
+    padding-right: 50px;
+    padding-left: 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+`;
+
 export const ClubCardContainer = styled.div`
-    float: left;
-    margin: 20px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 30px 50px 30px;
     background-color: ${colors.white};
-    width: 360px;
-    height: 200px;
+    width: 30vw;
+    min-width: 400px;
+    height: 240px;
     box-shadow: 0 3px 3px ${colors.light_grey};
     border-radius: 20px;
     text-align: left;
@@ -107,9 +125,10 @@ export const ClubCardContainer = styled.div`
 
     ul {
         list-style-type: none;
-        padding-left: 25px;
-        font-size: 18px;
+        font-size: 20px;
         letter-spacing: 1px;
+        margin-top: 15px;
+        margin-bottom: 12px;
     }
 
     a {
@@ -121,7 +140,7 @@ export const ClubCardContainer = styled.div`
 
 export const ClubHeaderContainer = styled.div`
     width: 100%;
-    height: 60%;
+    height: 65%;
     background-color: ${colors.dark_grey};
     text-align: center;
     color: ${colors.white};

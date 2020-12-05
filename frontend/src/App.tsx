@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Main, CardFrame } from './styling/StyledHome';
+
+import React, { useState } from 'react';
+import { Container, Main, CardFrame, ClubGrid } from './styling/StyledHome';
 import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
@@ -16,6 +17,7 @@ type ServerApp = {
   link: string;
   image?: string;
 };
+
 
 const App = () => {
   const [apps, setApps] = useState<ServerApp[]>([]);
@@ -39,7 +41,7 @@ const App = () => {
           />
         );
       })}
-    </div>
+    </ClubGrid>
   );
 
   return (
