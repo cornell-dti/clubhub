@@ -51,21 +51,17 @@ export const CategoriesContainer = styled.div`
     padding: 20px;
     padding-left: 80px;
     font-size: 20px;
-
     ul {
         list-style-type: none;
         margin: 10px 0 20px 20px;
         padding: 0%;
     }
-
     li {
         margin: 0 0 5px 0;
     }
-
     a {
         color: black;
         text-decoration: none;
-
         &:focus {
             font-weight: bold;
         }
@@ -93,7 +89,6 @@ export const SortButton = styled.div`
     padding-left: 80px;
     font-weight: bold;
     align-items: center;
-
     img {
         padding-right: 10px;
     }
@@ -126,7 +121,6 @@ export const ClubCardContainer = styled.div`
     text-align: left;
     align-content: center;
     overflow: hidden;
-
     ul {
         list-style-type: none;
         padding-left: 25px;
@@ -135,7 +129,6 @@ export const ClubCardContainer = styled.div`
         margin-top: 15px;
         margin-bottom: 12px;
     }
-
     a {
         color: ${colors.black};
         text-decoration: none;
@@ -149,7 +142,6 @@ export const ClubHeaderContainer = styled.div`
     background-color: ${colors.dark_grey};
     text-align: center;
     color: ${colors.white};
-
     img {
         float: left;
         padding: 25px;
@@ -157,7 +149,6 @@ export const ClubHeaderContainer = styled.div`
         height: 70px;
         border-radius: 30%;
     }
-
     h3 {
         float: left;
         width: 235px;

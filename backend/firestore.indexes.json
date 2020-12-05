@@ -1,7 +1,7 @@
 {
   "indexes":[
      {
-        "collectionGroup":"clubs",
+        "collectionGroup":"apps",
         "queryScope":"COLLECTION",
         "fields":[
            {
@@ -19,7 +19,7 @@
         ]
      },
      {
-      "collectionGroup":"clubs",
+      "collectionGroup":"apps",
       "queryScope":"COLLECTION",
       "fields":[
          {
