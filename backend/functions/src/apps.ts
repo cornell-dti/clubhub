@@ -5,10 +5,11 @@ import admin from './admin';
 const router = express.Router();
 const db = admin.firestore();
 
-const appCollection = db.collection('clubs');
+const appCollection = db.collection('apps');
 
 type FirebaseApp = {
-  name: string;
+  appName: string;
+  clubName: string;
   foldedName?: string;
   category: string;
   due: Timestamp;
@@ -46,7 +47,7 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params;
     const query = appCollection.doc(id);
     const doc = await query.get();
-    if(!doc.exists) throw new Error("App doesn't exist");
+    if (!doc.exists) throw new Error("App doesn't exist");
     const app = docToApp(doc);
     return res.status(200).send(app);
   } catch (e) {
@@ -78,11 +79,12 @@ router.get('/byCategory/:category', async (req, res) => {
 // Create Apps
 router.post('/', async (req, res) => {
   try {
-    const { due, name, category, link } = req.body;
+    const { due, appName, clubName, category, link } = req.body;
     const dateDue = new Date(due);
     const app: FirebaseApp = {
-      name,
-      foldedName: foldName(name),
+      appName,
+      clubName,
+      foldedName: foldName(clubName),
       category,
       due: Timestamp.fromDate(dateDue),
       link,
