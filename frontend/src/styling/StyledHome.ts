@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../constants/Colors';
+import { colors } from '../constants';
 import { device } from './Media';
 
 export const Container = styled.div`
