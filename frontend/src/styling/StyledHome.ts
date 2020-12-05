@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import { colors } from '../constants/Colors';
+import { colors } from '../constants/colors';
 import searchIcon from '../assets/search_icon.svg';
+import { device } from './Media';
 
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    max-width: 100%;   
 `;
 
 export const Main = styled.div`
@@ -17,7 +19,7 @@ export const HeaderContainer = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding 20px 7% 0 30px;
+    padding 20px 9vw 0 30px;
 
     img {
         height: 80px;
@@ -46,9 +48,9 @@ export const HeaderContainer = styled.div`
 `;
 
 export const CategoriesContainer = styled.div`
+    padding: 20px;
     padding-left: 80px;
     font-size: 20px;
-    margin: 0;
 
     ul {
         list-style-type: none;
@@ -76,6 +78,10 @@ export const CategoriesContainer = styled.div`
     h3 {
         margin: 0 0 0 10px;
     }
+    @media ${device.mobileM} { 
+        padding: 10px;
+        padding-left: 40px;
+      }
 `;
 
 export const SortButton = styled.div`
@@ -84,6 +90,7 @@ export const SortButton = styled.div`
     width: 100%;
     font-size: large;
     color: #757575;
+    padding-left: 80px;
     font-weight: bold;
     align-items: center;
 
@@ -109,9 +116,9 @@ export const ClubGrid = styled.div`
 export const ClubCardContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 10px 5% 50px 5%;
+    margin: 10px 4vw 50px 4vw;
     background-color: ${colors.white};
-    width: 40%;
+    width: 30vw;
     min-width: 400px;
     height: 240px;
     box-shadow: 0 3px 3px ${colors.light_grey};

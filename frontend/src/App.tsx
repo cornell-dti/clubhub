@@ -1,42 +1,41 @@
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { Container, Main, ClubGrid } from './styling/StyledHome';
 import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
 import ClubCard from './components/ClubCard';
 import Pagination from './components/Pagination';
+import axios from 'axios';
+import { BASE_URL } from './constants';
+
+type ServerApp = {
+  id: string;
+  name: string;
+  foldedName?: string;
+  category: string;
+  due: string;
+  link: string;
+  image?: string;
+};
+
 
 const App = () => {
-  const [clubs] = useState(
-    [
-      {name: 'AguaClara Cornell', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Autonomous Bicycle', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Concrete Canoe', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell AppDev', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Baja Racing', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell ChemE Car', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Cup Robotics', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Data Science', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design and Tech Initiative', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Design Build Fly', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Electric Vehicles', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Engaged IoT', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Engineering World Health', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Hyperloop', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell ICPC', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell iGem', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Mars Rover', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Micro-G', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'},
-      {name: 'Cornell Racing', application: 'Developer Application', app_link: 'temp', due: 'October 17, 2020'}
-    ]
-  );
+  const [apps, setApps] = useState<ServerApp[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(12);
   const [search, setSearch] = useState("");
 
-  const searchedCards = clubs.filter(club => 
-    club.name.toLowerCase().includes(search.toLowerCase()) || 
-    club.application.toLowerCase().includes(search.toLowerCase())
+  useEffect(() => {
+    axios
+      .get<ServerApp[]>(`${BASE_URL}/apps`)
+      .then((res) => res.data)
+      .then(setApps);
+  }, []);
+
+  const searchedCards = apps.filter(app => 
+    //app.name.toLowerCase().includes(search.toLowerCase())
+    true
   );
 
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -52,16 +51,18 @@ const App = () => {
     setCurrentPage(1);
   };
 
-  const currentCardsDisplay = (
+  const appCards = (
     <ClubGrid>
-      {currentCards.map(club => {
-        return <ClubCard
-          name={club.name}
-          application_link={club.app_link}
-          application_name={club.application}
-          due_date={club.due} />
+      {currentCards.map((app) => {
+        return (
+          <ClubCard
+            name={app.name}
+            application_link={app.link}
+            application_name={app.name + ' Application'}
+            due_date={new Date(app.due).toDateString()}
+          />
+        );
       })}
-      
     </ClubGrid>
   );
 
@@ -70,7 +71,7 @@ const App = () => {
     <h3>No applications available</h3> : 
     <div>
       <Sort />
-      {currentCardsDisplay}
+      {appCards}
       <Pagination 
         cardsPerPage={cardsPerPage} 
         totalCards={searchedCards.length}
