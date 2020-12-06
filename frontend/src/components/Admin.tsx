@@ -4,20 +4,23 @@ import { BASE_URL } from '../constants';
 import { useEffect } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 
-import {
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  TextField,
-  Typography,
-} from '@material-ui/core';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { KeyboardTimePicker } from '@material-ui/pickers';
+import {
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  Button,
+  DialogContent,
+  TextField,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  CardActions,
+  CardHeader,
+  CssBaseline,
+} from '@material-ui/core';
 
 type Status = 'edit' | 'delete' | 'create';
 
@@ -49,7 +52,13 @@ const Admin = () => {
     axios
       .get<ServerApp[]>(`${BASE_URL}/apps/all`)
       .then((res) => res.data)
-      .then((data) => data.map((app) => ({ ...emptyApp, ...app })))
+      .then((data) =>
+        data.map((app) => ({
+          ...emptyApp,
+          ...app,
+          due: new Date(app.due || '').toUTCString(),
+        }))
+      )
       .then(setApps);
   }, []);
 
@@ -96,10 +105,10 @@ const Admin = () => {
     <Dialog open={status === 'delete'}>
       <DialogTitle>Delete?</DialogTitle>
       <DialogActions>
-        <Button color="primary" onClick={removeStatus}>
+        <Button variant="contained" color="primary" onClick={removeStatus}>
           Cancel
         </Button>
-        <Button color="secondary" onClick={handleDelete}>
+        <Button variant="contained" color="secondary" onClick={handleDelete}>
           DELETE!
         </Button>
       </DialogActions>
@@ -186,10 +195,10 @@ const Admin = () => {
       </DialogContent>
 
       <DialogActions>
-        <Button color="secondary" onClick={removeStatus}>
+        <Button variant="contained" color="secondary" onClick={removeStatus}>
           Discard
         </Button>
-        <Button color="primary" onClick={handleSave}>
+        <Button variant="contained" color="primary" onClick={handleSave}>
           Save Changes
         </Button>
       </DialogActions>
@@ -197,13 +206,20 @@ const Admin = () => {
   );
 
   const createButton = (
-    <Button disabled={!!status} color="primary" onClick={() => updateStatus(emptyApp, 'create')}>
-      Add New
-    </Button>
+    <Grid item>
+      <Button
+        variant="contained"
+        disabled={!!status}
+        color="primary"
+        onClick={() => updateStatus(emptyApp, 'create')}
+      >
+        Add New
+      </Button>
+    </Grid>
   );
 
   const appCards = (
-    <div>
+    <>
       {apps.map((app) => {
         const { id, appName, clubName, category, due, link, image } = app;
         const content = [
@@ -214,41 +230,53 @@ const Admin = () => {
           `Image: ${image}`,
         ];
         return (
-          <Card key={id}>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {clubName}
-              </Typography>
-              {content.map((line, idx) => (
-                <Typography key={idx} variant="body2" color="textSecondary" component="p">
-                  {line}
+          <Grid item xs key={id}>
+            <Card>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {clubName}
                 </Typography>
-              ))}
-            </CardContent>
-            <Button disabled={!!status} color="primary" onClick={() => updateStatus(app, 'edit')}>
-              Edit
-            </Button>
-            <Button
-              disabled={!!status}
-              color="secondary"
-              onClick={() => updateStatus(app, 'delete')}
-            >
-              Delete
-            </Button>
-          </Card>
+                {content.map((line, idx) => (
+                  <Typography key={idx} variant="body2" color="textSecondary" component="p">
+                    {line}
+                  </Typography>
+                ))}
+              </CardContent>
+              <CardActions>
+                <Button
+                  variant="contained"
+                  disabled={!!status}
+                  color="primary"
+                  onClick={() => updateStatus(app, 'edit')}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="contained"
+                  disabled={!!status}
+                  color="secondary"
+                  onClick={() => updateStatus(app, 'delete')}
+                >
+                  Delete
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
         );
       })}
-    </div>
+    </>
   );
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Container>
+      <CssBaseline />
+      <CardHeader title="ClubHub Admin"></CardHeader>
+      <Grid container spacing={2} direction="column" alignItems="center">
         {createButton}
         {appCards}
         {(status === 'create' || status === 'edit') && editModal}
         {status === 'delete' && deleteModal}
-      </Container>
+      </Grid>
     </MuiPickersUtilsProvider>
   );
 };
