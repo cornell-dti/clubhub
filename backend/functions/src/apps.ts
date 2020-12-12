@@ -1,9 +1,9 @@
 import * as express from 'express';
 import { DocumentSnapshot, Timestamp } from '@google-cloud/firestore';
-import admin from './admin';
+import { db } from './admin';
+import { authorize } from './auth';
 
 const router = express.Router();
-const db = admin.firestore();
 
 const appCollection = db.collection('apps');
 
@@ -79,9 +79,12 @@ router.get('/byCategory/:category', async (req, res) => {
 // Get All Apps Including Expired
 router.get('/all/', async (req, res) => {
   try {
-    const query = appCollection
-      .orderBy('due')
-      .orderBy('foldedName');
+    const authorized = await authorize(req.user);
+    if(!authorized) {
+      return res.status(401).send("Not Authenticated!");
+    }
+
+    const query = appCollection.orderBy('due').orderBy('foldedName');
     const response = await query.get();
     const apps = response.docs.map(docToApp);
     return res.status(200).send(apps);
@@ -95,6 +98,11 @@ router.get('/all/', async (req, res) => {
 // Create App
 router.post('/', async (req, res) => {
   try {
+    const authorized = await authorize(req.user);
+    if(!authorized) {
+      return res.status(401).send("Not Authenticated!");
+    }
+
     const { due, clubName, appName, category, link, image } = req.body;
     const dateDue = new Date(due);
     const app: FirebaseApp = {
@@ -118,6 +126,11 @@ router.post('/', async (req, res) => {
 // Update App
 router.post('/:id', async (req, res) => {
   try {
+    const authorized = await authorize(req.user);
+    if(!authorized) {
+      return res.status(401).send("Not Authenticated!");
+    }
+
     const { id } = req.params;
     const { due, clubName, appName, category, link, image } = req.body;
     const dateDue = new Date(due);
@@ -142,9 +155,14 @@ router.post('/:id', async (req, res) => {
 // Delete App
 router.delete('/:id', async (req, res) => {
   try {
+    const authorized = await authorize(req.user);
+    if(!authorized) {
+      return res.status(401).send("Not Authenticated!");
+    }
+
     const { id } = req.params;
     await appCollection.doc(id).delete();
-    return res.status(200).send("Deleted");
+    return res.status(200).send('Deleted');
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);

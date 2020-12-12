@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { BASE_URL } from '../constants';
 import { useEffect } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
@@ -21,8 +21,16 @@ import {
   CardHeader,
   CssBaseline,
 } from '@material-ui/core';
+import Alert, { AlertProps } from '@material-ui/lab/Alert';
+import firebase from 'firebase';
+import { StyledFirebaseAuth } from 'react-firebaseui';
 
 type Status = 'edit' | 'delete' | 'create';
+
+type AlertInfo = {
+  props: AlertProps;
+  message: string;
+};
 
 type ServerApp = {
   id?: string;
@@ -43,23 +51,61 @@ const emptyApp: ServerApp = {
   image: '',
 };
 
+const firebaseConfig = {
+  apiKey: 'AIzaSyCNAXlrhzBU-xH890rKyYnN-bjeJ0fIaLY',
+  authDomain: 'clubhub-dev-89ca0.firebaseapp.com',
+  databaseURL: 'https://clubhub-dev-89ca0.firebaseio.com',
+  projectId: 'clubhub-dev-89ca0',
+  storageBucket: 'clubhub-dev-89ca0.appspot.com',
+  messagingSenderId: '980709987861',
+  appId: '1:980709987861:web:d79b026cf49cbe7ad7a01c',
+  measurementId: 'G-BX6SHVT6T1',
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const uiConfig = {
+  signInFlow: 'popup',
+  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+};
+
+// Maybe go into utils
+const generateAxiosConfig = async (user: firebase.User | null) => {
+  const idToken = await user?.getIdToken();
+  return idToken ? { headers: { Authorization: `Bearer ${idToken}` } } : {};
+};
+
 const Admin = () => {
+  const [user, setUser] = useState<firebase.User | null>(null);
   const [apps, setApps] = useState<ServerApp[]>([]);
   const [selectedApp, setSelectedApp] = useState<ServerApp>();
   const [status, setStatus] = useState<Status>();
+  const [alert, setAlert] = useState<AlertInfo>();
 
   useEffect(() => {
-    axios
-      .get<ServerApp[]>(`${BASE_URL}/apps/all`)
-      .then((res) => res.data)
-      .then((data) =>
-        data.map((app) => ({
-          ...emptyApp,
-          ...app,
-          due: new Date(app.due || '').toUTCString(),
-        }))
-      )
-      .then(setApps);
+    return firebase.auth().onAuthStateChanged(async (user) => {
+      setUser(user);
+
+      if (user) {
+        const config = await generateAxiosConfig(user);
+        axios
+          .get<ServerApp[]>(`${BASE_URL}/apps/all`, config)
+          .then((res) => res.data)
+          .then((data) =>
+            data.map((app) => ({
+              ...emptyApp,
+              ...app,
+              due: new Date(app.due || '').toUTCString(),
+            }))
+          )
+          .then(setApps)
+          .catch((error: AxiosError) => {
+            if (error.response?.status === 401) {
+              setAlert({ props: { severity: 'error' }, message: 'Not Authorized :((' });
+            }
+          });
+      }
+    });
   }, []);
 
   const removeStatus = () => {
@@ -77,7 +123,8 @@ const Admin = () => {
     if (!selectedApp) return;
     const { id } = selectedApp;
     removeStatus();
-    await axios.delete<ServerApp[]>(`${BASE_URL}/apps/${id}`);
+    const config = await generateAxiosConfig(user);
+    await axios.delete<ServerApp[]>(`${BASE_URL}/apps/${id}`, config);
     const updatedApps = [...apps].filter((app) => app.id !== id);
     setApps(updatedApps);
   };
@@ -85,16 +132,20 @@ const Admin = () => {
   const handleSave = async () => {
     if (!selectedApp) return;
     const { id, appName, clubName, due, category, link, image } = selectedApp;
-    console.log(selectedApp);
     removeStatus();
-    const res = await axios.post<string>(`${BASE_URL}/apps/${id || ''}`, {
-      appName,
-      clubName,
-      due,
-      category,
-      link,
-      image,
-    });
+    const config = await generateAxiosConfig(user);
+    const res = await axios.post<string>(
+      `${BASE_URL}/apps/${id || ''}`,
+      {
+        appName,
+        clubName,
+        due,
+        category,
+        link,
+        image,
+      },
+      config
+    );
     const updatedApps = selectedApp.id
       ? [...apps].map((app) => (app.id === id ? selectedApp : app))
       : [...apps, { ...selectedApp, id: res.data }];
@@ -205,6 +256,8 @@ const Admin = () => {
     </Dialog>
   );
 
+  const alertComponent = alert && <Alert {...alert.props}>{alert.message}</Alert>;
+
   const createButton = (
     <Grid item>
       <Button
@@ -214,6 +267,23 @@ const Admin = () => {
         onClick={() => updateStatus(emptyApp, 'create')}
       >
         Add New
+      </Button>
+    </Grid>
+  );
+
+  const signoutButton = (
+    <Grid item>
+      <Button
+        variant="contained"
+        disabled={!!status}
+        color="secondary"
+        onClick={() => {
+          firebase.auth().signOut();
+          setApps([]);
+          setAlert(undefined);
+        }}
+      >
+        Sign Out
       </Button>
     </Grid>
   );
@@ -267,16 +337,26 @@ const Admin = () => {
     </>
   );
 
+  const adminPage = (
+    <Grid container spacing={2} direction="column" alignItems="center">
+      {alertComponent}
+      <CardActions>
+        {createButton}
+        {signoutButton}
+      </CardActions>
+      {appCards}
+      {(status === 'create' || status === 'edit') && editModal}
+      {status === 'delete' && deleteModal}
+    </Grid>
+  );
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <CssBaseline />
-      <CardHeader title="ClubHub Admin"></CardHeader>
-      <Grid container spacing={2} direction="column" alignItems="center">
-        {createButton}
-        {appCards}
-        {(status === 'create' || status === 'edit') && editModal}
-        {status === 'delete' && deleteModal}
-      </Grid>
+      <CardHeader
+        title={`ClubHub Admin | ${user ? `Logged in as ${user.email}` : 'Not Logged In'}`}
+      ></CardHeader>
+      {user ? adminPage : <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />}
     </MuiPickersUtilsProvider>
   );
 };
