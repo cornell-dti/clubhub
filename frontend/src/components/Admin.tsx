@@ -20,6 +20,7 @@ import {
   CardActions,
   CardHeader,
   CssBaseline,
+  Container,
 } from '@material-ui/core';
 import Alert, { AlertProps } from '@material-ui/lab/Alert';
 import firebase from 'firebase';
@@ -300,7 +301,7 @@ const Admin = () => {
           `Image: ${image}`,
         ];
         return (
-          <Grid item xs key={id}>
+          <Grid item key={id}>
             <Card>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -338,16 +339,18 @@ const Admin = () => {
   );
 
   const adminPage = (
-    <Grid container spacing={2} direction="column" alignItems="center">
-      {alertComponent}
-      <CardActions>
-        {createButton}
-        {signoutButton}
-      </CardActions>
-      {appCards}
-      {(status === 'create' || status === 'edit') && editModal}
-      {status === 'delete' && deleteModal}
-    </Grid>
+    <Container maxWidth={false}>
+      <Grid container spacing={2} wrap="nowrap" direction="column" alignItems="center">
+        {alertComponent}
+        <CardActions>
+          {createButton}
+          {signoutButton}
+        </CardActions>
+        {appCards}
+        {(status === 'create' || status === 'edit') && editModal}
+        {status === 'delete' && deleteModal}
+      </Grid>
+    </Container>
   );
 
   return (
