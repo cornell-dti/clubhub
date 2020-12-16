@@ -26,6 +26,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(12);
   const [search, setSearch] = useState("");
+  const [sortMeth, setSortState] = useState("Due Date");
 
   useEffect(() => {
     axios
@@ -34,7 +35,68 @@ const App = () => {
       .then(setApps);
   }, []);
 
-  const searchedCards = apps.filter(app => 
+  const sortHandler = () => {
+    setSortState((sortMeth === "Due Date")? "Club Name" : "Due Date");
+  }
+
+  const sortedCards = apps.sort(
+    (sortMeth === "Due Date")? 
+      (a: ServerApp, b: ServerApp) => dateToInt(a.due) - dateToInt(b.due) : 
+      (a: ServerApp, b: ServerApp) => a.clubName.localeCompare(b.clubName)
+  );
+
+  /**
+   * Convert date into number of format yyyymmdd
+   * @param date a valid date in the format of Month dd, yyyy
+   */
+  const dateToInt = (date: string) => {
+    const parsedDate: string[] = date.split(" ");
+    let strDate: string = parsedDate[2].substring(1);
+    switch(parsedDate[0]) {
+      case "January": 
+        strDate += "01";
+        break;
+      case "February": 
+        strDate += "02";
+        break;
+      case "March": 
+        strDate += "03";
+        break;
+      case "April": 
+        strDate += "04";
+        break;
+      case "May": 
+        strDate += "05";
+        break;
+      case "June": 
+        strDate += "06";
+        break;
+      case "July": 
+        strDate += "07";
+        break;
+      case "August": 
+        strDate += "08";
+        break;
+      case "September": 
+        strDate += "09";
+        break;
+      case "October": 
+        strDate += "10";
+        break;
+      case "November":
+        strDate += "11";
+        break;
+      case "December": 
+        strDate += "12";
+        break;
+      default: 
+        break
+    }
+    strDate += parsedDate[1];
+    return Number(strDate);
+  }
+
+  const searchedCards = sortedCards.filter(app => 
     app.appName.toLowerCase().includes(search.toLowerCase()) ||
     app.clubName.toLowerCase().includes(search.toLowerCase())
   );
@@ -71,7 +133,9 @@ const App = () => {
     currentCards.length === 0 ?
     <h3>No applications available</h3> : 
     <div>
-      <Sort />
+      <Sort 
+        sortHandler={sortHandler}
+        sortMeth={sortMeth}/>
       {appCards}
       <Pagination 
         cardsPerPage={cardsPerPage} 
