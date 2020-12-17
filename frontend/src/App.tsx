@@ -39,19 +39,13 @@ const App = () => {
     setSortState((sortMeth === "Due Date")? "Club Name" : "Due Date");
   }
 
-  const sortedCards = apps.sort(
-    (sortMeth === "Due Date")? 
-      (a: ServerApp, b: ServerApp) => dateToInt(a.due) - dateToInt(b.due) : 
-      (a: ServerApp, b: ServerApp) => a.clubName.localeCompare(b.clubName)
-  );
-
   /**
    * Convert date into number of format yyyymmdd
    * @param date a valid date in the format of Month dd, yyyy
    */
   const dateToInt = (date: string) => {
     const parsedDate: string[] = date.split(" ");
-    let strDate: string = parsedDate[2].substring(1);
+    let strDate: string = parsedDate[2];
     switch(parsedDate[0]) {
       case "January": 
         strDate += "01";
@@ -92,9 +86,22 @@ const App = () => {
       default: 
         break
     }
-    strDate += parsedDate[1];
+    const day = parsedDate[1].substring(0, parsedDate[1].length - 1)
+
+    if (day.length < 2) {
+      strDate += '0' + day;
+    } else {
+      strDate += day;
+    }
+
     return Number(strDate);
-  }
+  };
+
+  const sortedCards = apps.sort(
+    (sortMeth === "Due Date")? 
+      (a: ServerApp, b: ServerApp) => dateToInt(a.due) - dateToInt(b.due) : 
+      (a: ServerApp, b: ServerApp) => a.clubName.localeCompare(b.clubName)
+  );
 
   const searchedCards = sortedCards.filter(app => 
     app.appName.toLowerCase().includes(search.toLowerCase()) ||
