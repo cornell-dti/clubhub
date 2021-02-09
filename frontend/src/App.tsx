@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { Container, Main, CardFrame, ClubGrid } from './styling/StyledHome';
+import React, { useState, useEffect } from 'react';
+import { Container, Main, CardFrame } from './styling/StyledHome';
 import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
@@ -42,7 +42,7 @@ const App = () => {
           />
         );
       })}
-    </ClubGrid>
+    </div>
   );
 
   return (
