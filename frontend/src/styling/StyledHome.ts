@@ -133,11 +133,4 @@ export const ClubHeaderContainer = styled.div`
     img {
         height: 100%;
     }
-    h3 {
-        float: left;
-        width: 235px;
-        height: 70px;
-        text-align: left;
-        font-size: 25px;  
-    }
 `;

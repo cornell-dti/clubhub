@@ -5,7 +5,10 @@ const clubCard = ({application_link, application_name, name, due_date, image}: P
   return (
     <ClubCardContainer>
       <ClubHeaderContainer>
-        <img src={(image !== undefined)? image : ""} alt={name+" image"} />
+        {(image !== undefined)? 
+          <img src={image} alt={name+" image"} /> : 
+          <h1>{name}</h1>
+        }
       </ClubHeaderContainer>
       <ul>
         <li><a href={application_link}>{application_name}</a>
