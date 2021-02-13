@@ -6,7 +6,7 @@ const categories = () => {
     <CategoriesContainer>
       <h2>Categories</h2>
       <ul>
-        <li><a href="#all">All</a></li>
+        <li><a href="#all">All Business Clubs</a></li>
         <li><a href="#impact">Impact</a></li>
         <li><a href="#social">Social</a></li>
         <li><a href="#entrepreneurship">Entrepreneurship</a></li>
