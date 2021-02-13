@@ -131,11 +131,7 @@ export const ClubHeaderContainer = styled.div`
     text-align: center;
     color: ${colors.white};
     img {
-        float: left;
-        padding: 25px;
-        width: 70px;
-        height: 70px;
-        border-radius: 30%;
+        height: 100%;
     }
     h3 {
         float: left;
