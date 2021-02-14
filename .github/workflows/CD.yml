@@ -1,0 +1,30 @@
+name: CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Node
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12.x'
+    - name: Yarn Install frontend
+      run: cd frontend && yarn install
+    - name: Yarn Install functions
+      run: cd functions && yarn install
+    - name: Build frontend
+      run: cd frontend && yarn build
+    - name: Deploy to Firebase
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      run: |
+        sudo npm install --global firebase-tools
+        echo $FIREBASE_SERVICE_ACCOUNT > ./functions/src/firebase-key.json
+        firebase deploy --token=$FIREBASE_TOKEN --non-interactive
