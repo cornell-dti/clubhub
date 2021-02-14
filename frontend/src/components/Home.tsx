@@ -37,7 +37,7 @@ const Home = () => {
             key={app.id}
             name={app.clubName}
             application_link={app.link}
-            application_name={app.appName + ' Application'}
+            application_name={app.appName}
             due_date={new Date(app.due).toDateString()}
             image={app.image}
           />
