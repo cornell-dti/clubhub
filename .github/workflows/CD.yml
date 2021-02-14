@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up Node
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2-beta
     - name: Yarn Install
       run: cd frontend && yarn install
     - name: Build frontend
