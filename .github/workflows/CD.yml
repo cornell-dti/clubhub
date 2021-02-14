@@ -15,8 +15,10 @@ jobs:
       uses: actions/setup-node@v2-beta
       with:
         node-version: '12.x'
-    - name: Yarn Install
+    - name: Yarn Install frontend
       run: cd frontend && yarn install
+    - name: Yarn Install functions
+      run: cd functions && yarn install
     - name: Build frontend
       run: cd frontend && yarn build
     - name: Deploy to Firebase
