@@ -3,8 +3,6 @@ name: CD
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -15,9 +13,9 @@ jobs:
     - name: Set up Node
       uses: actions/setup-node@v1
     - name: Yarn Install
-      run: yarn install
+      run: cd frontend && yarn install
     - name: Build frontend
-      run: yarn build
+      run: cd frontend && yarn build
     - name: Deploy to Firebase
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
