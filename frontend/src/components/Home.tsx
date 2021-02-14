@@ -39,6 +39,7 @@ const Home = () => {
             application_link={app.link}
             application_name={app.appName + ' Application'}
             due_date={new Date(app.due).toDateString()}
+            image={app.image}
           />
         );
       })}
