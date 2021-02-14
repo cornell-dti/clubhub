@@ -1,0 +1,25 @@
+name: CD
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Node
+      uses: actions/setup-node@v1
+    - name: Yarn Install
+      run: yarn install
+    - name: Build frontend
+      run: yarn build
+    - name: Deploy to Firebase
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      run: |
+        ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
