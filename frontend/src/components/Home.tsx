@@ -7,6 +7,7 @@ import ClubCard from './ClubCard';
 import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useEffect } from 'react';
+import { format } from "date-fns";
 
 type ServerApp = {
   id: string;
@@ -37,8 +38,8 @@ const Home = () => {
             key={app.id}
             name={app.clubName}
             application_link={app.link}
-            application_name={app.appName + ' Application'}
-            due_date={new Date(app.due).toDateString()}
+            application_name={app.appName}
+            due_date={format(new Date(app.due), "MMMM do, yyyy hh:mm aaaaa'm'")}
             image={app.image}
           />
         );
