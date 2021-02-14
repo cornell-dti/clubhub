@@ -22,4 +22,5 @@ jobs:
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       run: |
-        ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+        yarn global add firebase
+        firebase deploy --token=$FIREBASE_TOKEN --non-interactive
