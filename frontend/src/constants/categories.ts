@@ -5,15 +5,16 @@ type Category = {
 
 const categories: Category[] = [
   { name: 'All', url: '' },
-  { name: 'Academic', url: 'academic' },
-  { name: 'Cultural', url: 'cultural' },
-  { name: 'Games', url: 'games' },
-  { name: 'Greek', url: 'greek' },
-  { name: 'Poltical', url: 'political' },
-  { name: 'Project Team', url: 'project-team' },
-  { name: 'Publication/Media', url: 'publication-media' },
-  { name: 'Sustainability', url: 'sustainability' },
-  { name: 'Sports', url: 'sports' },
+  { name: 'Community Impact', url: 'community-impact' },
+  { name: 'Research & Publication', url: 'research-&-publication' },
+  { name: 'Investment Funds', url: 'investment-funds' },
+  { name: 'Professional Development', url: 'professional-development' },
+  { name: 'Entrepreneurship', url: 'entrepreneurship' },
+  { name: 'Consulting', url: 'consulting' },
+  { name: 'Education', url: 'education' },
+  { name: 'Marketing', url: 'marketing' },
+  { name: 'Finance', url: 'finance' },
+  { name: 'Specific Industry', url: 'specific-industry' },
 ];
 
 export { categories };
