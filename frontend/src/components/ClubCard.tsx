@@ -11,7 +11,7 @@ const clubCard = ({application_link, application_name, name, due_date, image}: P
         }
       </ClubHeaderContainer>
       <ul>
-        <li><a href={application_link}>{application_name}</a>
+        <li><a href={application_link} target="_blank" rel="noopener noreferrer">{application_name}</a>
         </li><li>Due: {due_date}</li>
       </ul>
     </ClubCardContainer>
