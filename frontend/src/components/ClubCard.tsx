@@ -6,12 +6,13 @@ const clubCard = ({application_link, application_name, name, due_date, image}: P
     <ClubCardContainer>
       <ClubHeaderContainer>
         {(image !== undefined)? 
-          <img src={image} alt={name+" image"} /> : 
+          <a href={application_link} target="_blank" rel="noopener noreferrer">
+            <img src={image} alt={name + " image"} /></a> : 
           <h1>{name}</h1>
         }
       </ClubHeaderContainer>
       <ul>
-        <li><a href={application_link}>{application_name}</a>
+        <li><a href={application_link} target="_blank" rel="noopener noreferrer">{application_name}</a>
         </li><li>Due: {due_date}</li>
       </ul>
     </ClubCardContainer>
