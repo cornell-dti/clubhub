@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Container, Main, CardFrame, ClubGrid } from '../styling/StyledHome';
 import Header from './Header';
-import Categories from './Categories';
 import Sort from './Sort';
 import ClubCard from './ClubCard';
 import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useEffect } from 'react';
-import { format } from "date-fns";
+import { format } from 'date-fns';
+import CategoriesPanel from './CategoriesPanel';
+import { useLocation } from 'react-router-dom';
 
 type ServerApp = {
   id: string;
@@ -22,6 +23,11 @@ type ServerApp = {
 
 const Home = () => {
   const [apps, setApps] = useState<ServerApp[]>([]);
+  const { hash } = useLocation();
+
+  const query = hash.replace('#', '');
+
+  const filteredApps = query ? apps.filter(({ category }) => category === query) : apps;
 
   useEffect(() => {
     axios
@@ -32,7 +38,7 @@ const Home = () => {
 
   const appCards = (
     <ClubGrid>
-      {apps.map((app) => {
+      {filteredApps.map((app) => {
         return (
           <ClubCard
             key={app.id}
@@ -51,7 +57,7 @@ const Home = () => {
     <Container>
       <Header />
       <Main>
-        <Categories />
+        <CategoriesPanel />
         <CardFrame>
           <Sort />
           {appCards}
