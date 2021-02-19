@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { colors } from '../constants';
-import searchIcon from '../assets/search_icon.svg';
 import { device } from './Media';
 
 export const Container = styled.div`
@@ -13,36 +12,40 @@ export const Main = styled.div`
     display: flex;
 `;
 
+export const CardFrame = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 export const HeaderContainer = styled.div`
     min-height: 100px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding 20px 9vw 0 30px;
-
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 10px;
     img {
         height: 80px;
         flex-shrink: 0;
         margin: 0;
     }
-
-    input {
-        width: 30vw;
-        min-width: 200px;
-        max-width: 450px;
-        height: 30px;
-        border-radius: 100px;
-        padding: 0 10px;
-        box-shadow: 2px 2px 5px 2px ${colors.light_grey};
-        border-style: none;
-        background-image: url(${searchIcon});
-        background-position: 7px 7px;
-        background-repeat: no-repeat;
-        text-indent: 30px;
-        
+    ul {
+        list-style-type: none;
+        font-size: large;
+    }
+    li {
+        float: left;
+    }
+    a {
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
         &:focus {
-            outline: none;
+            font-weight: bold;
         }
     }
 `;
@@ -53,7 +56,7 @@ export const CategoriesContainer = styled.div`
     font-size: 20px;
     ul {
         list-style-type: none;
-        margin: 10px 0 20px 20px;
+        margin-left: 20px;
         padding: 0%;
     }
     li {
@@ -66,14 +69,6 @@ export const CategoriesContainer = styled.div`
             font-weight: bold;
         }
     }
-
-    h2 {
-        margin 10px 0 10px 0;
-    }
-
-    h3 {
-        margin: 0 0 0 10px;
-    }
     @media ${device.mobileM} { 
         padding: 10px;
         padding-left: 40px;
@@ -82,9 +77,6 @@ export const CategoriesContainer = styled.div`
 
 export const SortButton = styled.div`
     display: flex;
-    padding-left: 80px;
-    width: 100%;
-    font-size: large;
     color: #757575;
     padding-left: 80px;
     font-weight: bold;
@@ -92,11 +84,8 @@ export const SortButton = styled.div`
     img {
         padding-right: 10px;
     }
-
-    p {
-        &:hover {
-            cursor: pointer;
-        }
+    &:hover {
+        cursor: pointer;
     }
 `;
 
@@ -111,7 +100,7 @@ export const ClubGrid = styled.div`
 export const ClubCardContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 10px 4vw 50px 4vw;
+    margin: 10px 30px 50px 30px;
     background-color: ${colors.white};
     width: 30vw;
     min-width: 400px;
@@ -123,7 +112,6 @@ export const ClubCardContainer = styled.div`
     overflow: hidden;
     ul {
         list-style-type: none;
-        padding-left: 25px;
         font-size: 20px;
         letter-spacing: 1px;
         margin-top: 15px;
@@ -143,45 +131,6 @@ export const ClubHeaderContainer = styled.div`
     text-align: center;
     color: ${colors.white};
     img {
-        float: left;
-        padding: 25px;
-        width: 70px;
-        height: 70px;
-        border-radius: 30%;
-    }
-    h3 {
-        float: left;
-        width: 235px;
-        height: 70px;
-        text-align: left;
-        font-size: 25px;  
-    }
-`;
-
-export const StyledPagination = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        float: left;
-        margin: 5px;
-    }
-
-    a {
-        display: block;
-        color: black;
-        text-align: center;
-        text-decoration: none;
-
-        &:focus {
-            font-weight: bold;
-        }
+        height: 100%;
     }
 `;

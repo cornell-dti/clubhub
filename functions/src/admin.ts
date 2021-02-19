@@ -8,4 +8,7 @@ admin.initializeApp({
   databaseURL: 'https://clubhub-dev-89ca0.firebaseio.com',
 });
 
-export default admin;
+const db = admin.firestore();
+const auth = admin.auth();
+
+export { db, auth }
