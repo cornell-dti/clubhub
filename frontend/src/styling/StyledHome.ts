@@ -13,6 +13,7 @@ export const Main = styled.div`
 `;
 
 export const CardFrame = styled.div`
+    width: 85%;
     display: flex;
     flex-direction: column;
 `;
@@ -31,36 +32,23 @@ export const HeaderContainer = styled.div`
         flex-shrink: 0;
         margin: 0;
     }
-    ul {
-        list-style-type: none;
-        font-size: large;
-    }
-    li {
-        float: left;
-    }
-    a {
-        display: block;
-        color: black;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        &:focus {
-            font-weight: bold;
-        }
-    }
 `;
 
 export const CategoriesContainer = styled.div`
+    width: 15%;
     padding: 20px;
-    padding-left: 80px;
+    padding-left: 30px;
     font-size: 20px;
+    h2 {
+        margin: 0;
+    }
     ul {
         list-style-type: none;
         margin-left: 20px;
         padding: 0%;
     }
     li {
-        margin: 0 0 5px 0;
+        margin: 0 0 10px 0;
     }
     a {
         color: black;
@@ -69,30 +57,48 @@ export const CategoriesContainer = styled.div`
             font-weight: bold;
         }
     }
-    @media ${device.mobileM} { 
-        padding: 10px;
-        padding-left: 40px;
-      }
+    @media ${device.mobileL} {
+        display: ${({openMenu}:props) => openMenu? 'flex' : 'none'};
+        flex-direction: column;
+        transform: ${({openMenu}:props) => openMenu ? 'tranlateX(0)' : 'translateX(-100%)'};
+        transition: all 0.3s ease-in-out;
+    }
 `;
+
+export const CategoriesToggle = styled.div`
+    display: none;
+    @media ${device.mobileL} {
+        padding-top: 10px;
+        padding-left: 40px;
+        display: flex;
+    }
+`;
+
+type props = {
+    openMenu: boolean
+}
 
 export const SortButton = styled.div`
     display: flex;
-    color: #757575;
-    padding-left: 80px;
+    color: ${colors.grey};
+    padding-left: 30px;
     font-weight: bold;
     align-items: center;
     img {
         padding-right: 10px;
     }
-    &:hover {
-        cursor: pointer;
+    p {
+        &:hover {
+            cursor: pointer;
+        }
     }
 `;
 
 export const ClubGrid = styled.div`
     display: flex;
-    padding-right: 50px;
-    padding-left: 50px;
+    /* padding-right: 50px;
+    padding-left: 50px; */
+    min-width: 500px;
     flex-direction: row;
     flex-wrap: wrap;
 `;
