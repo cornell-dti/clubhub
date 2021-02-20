@@ -23,6 +23,7 @@ type ServerApp = {
 
 const Home = () => {
   const [apps, setApps] = useState<ServerApp[]>([]);
+  const [sortMeth, setSortState] = useState("Due Date");
   const { hash } = useLocation();
 
   const query = hash.replace('#', '');
@@ -36,9 +37,19 @@ const Home = () => {
       .then(setApps);
   }, []);
 
+  const sortHandler = () => {
+    setSortState((sortMeth === "Due Date")? "Club Name" : "Due Date");
+  }
+
+  const sortedCards = filteredApps.sort(
+    (sortMeth === "Due Date")? 
+      (a: ServerApp, b: ServerApp) => (new Date(a.due)).getTime() - (new Date(b.due)).getTime() : 
+      (a: ServerApp, b: ServerApp) => a.clubName.localeCompare(b.clubName)
+  );
+
   const appCards = (
     <ClubGrid>
-      {filteredApps.map((app) => {
+      {sortedCards.map((app) => {
         return (
           <ClubCard
             key={app.id}
@@ -59,7 +70,9 @@ const Home = () => {
       <Main>
         <CategoriesPanel />
         <CardFrame>
-          <Sort />
+          <Sort 
+            sortHandler={sortHandler}
+            sortMeth={sortMeth}/>
           {appCards}
         </CardFrame>
       </Main>
