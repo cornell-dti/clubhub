@@ -37,7 +37,7 @@ export const HeaderContainer = styled.div`
 export const CategoriesContainer = styled.div`
     width: 15%;
     padding: 20px;
-    padding-left: 80px;
+    padding-left: 30px;
     font-size: 20px;
     h2 {
         margin: 0;
@@ -69,7 +69,7 @@ export const CategoriesToggle = styled.div`
     display: none;
     @media ${device.mobileL} {
         padding-top: 10px;
-        padding-left: 50px;
+        padding-left: 40px;
         display: flex;
     }
 `;
